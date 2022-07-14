@@ -5,7 +5,7 @@
 
 #include <main.h>
 
-void main(void* dt, void* kernel) {
+void main(void) {
 	/* C entry */
 
 	/* Initialize SoC and Board specific peripherals/quirks */
@@ -17,6 +17,6 @@ void main(void* dt, void* kernel) {
 
 	/* Copy kernel to memory and boot  */
 	printk("Booting linux...");
-	memcpy((void*)CONFIG_PAYLOAD_ENTRY, kernel, (unsigned long) &kernel_size);
-	load_kernel(dt, 0, 0, 0, (void*)CONFIG_PAYLOAD_ENTRY);	
+	/*memcpy((void*)CONFIG_PAYLOAD_ENTRY, kernel, (unsigned long) &kernel_size);
+	load_kernel(dt, 0, 0, 0, (void*)CONFIG_PAYLOAD_ENTRY);	*/
 }

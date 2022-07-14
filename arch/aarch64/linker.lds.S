@@ -7,24 +7,24 @@ OUTPUT_FORMAT("elf64-littleaarch64")
 OUTPUT_ARCH(aarch64)
 TARGET(binary)
 
-INPUT(KERNEL_PATH)
-INPUT(DTB_PATH)
-
 SECTIONS
 {
-	.boot : {
-		arch/aarch64/Start.o
+	. = 0x00000000;
+
+	. = ALIGN(8);
+	.text :
+	{
+		arch/aarch64/Start.o (.text*)
 	}
 
-	.dtb ALIGN(0x1000) : {
-		dtb = .;
-		DTB_PATH
+	. = ALIGN(8);
+	.data : {
+		*(.data*)
 	}
 
-	.kernel ALIGN(0x1000) : {
-		kernel = .;
-		KERNEL_PATH
-	}
+	. = ALIGN(8);
 
-	kernel_size = SIZEOF(.kernel);
+	. = .;
+	
+	_end = .;
 }
